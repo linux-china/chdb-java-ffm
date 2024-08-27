@@ -9,7 +9,7 @@ public class LibChdbTest {
 
     @Test
     public void testLoadChdbLibrary() throws Exception {
-        String sql = "select * from file('logs.csv','CSV')";
+        String sql = "select * from file('src/test/resources/logs.csv','CSV')";
         MemorySegment result = null;
         try (Arena arena = Arena.ofShared()) {
             MemorySegment pointers = arena.allocate(ValueLayout.ADDRESS, 3);
