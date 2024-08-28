@@ -8,7 +8,6 @@ import javax.sql.*;
 import java.sql.*;
 
 public class JdbcTemplateTest {
-    @AutoClose
     private static JdbcTemplate jdbcTemplate;
 
     @BeforeAll
