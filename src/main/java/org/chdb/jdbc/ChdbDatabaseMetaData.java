@@ -149,26 +149,40 @@ public class ChdbDatabaseMetaData implements DatabaseMetaData {
 
     @Override
     public String getSQLKeywords() throws SQLException {
-        return "APPLY,ASOF,ATTACH,CLUSTER,DATABASE,DATABASES,DETACH,DICTIONARY,DICTIONARIES,ILIKE,INF,LIMIT,LIVE,KILL,MATERIALIZED,NAN,OFFSET,OPTIMIZE,OUTFILE,POLICY,PREWHERE,PROFILE,QUARTER,QUOTA,RENAME,REPLACE,SAMPLE,SETTINGS,SHOW,TABLES,TIES,TOP,TOTALS,TRUNCATE,USE,WATCH,WEEK";
+        return "APPLY,ASOF,ATTACH,CLUSTER,DATABASE,DATABASES,DETACH,"
+                + "DICTIONARY,DICTIONARIES,ILIKE,INF,LIMIT,LIVE,KILL,MATERIALIZED,"
+                + "NAN,OFFSET,OPTIMIZE,OUTFILE,POLICY,PREWHERE,PROFILE,QUARTER,QUOTA,"
+                + "RENAME,REPLACE,SAMPLE,SETTINGS,SHOW,TABLES,TIES,TOP,TOTALS,TRUNCATE,USE,WATCH,WEEK";
     }
 
     @Override
     public String getNumericFunctions() throws SQLException {
+        // took from below URLs(not from system.functions):
+        // https://clickhouse.com/docs/en/sql-reference/functions/arithmetic-functions/
+        // https://clickhouse.com/docs/en/sql-reference/functions/math-functions/
         return "abs,acos,acosh,asin,asinh,atan,atan2,atanh,cbrt,cos,cosh,divide,e,erf,erfc,exp,exp10,exp2,gcd,hypot,intDiv,intDivOrZero,intExp10,intExp2,lcm,lgamma,ln,log,log10,log1p,log2,minus,modulo,moduloOrZero,multiply,negate,pi,plus,pow,power,sign,sin,sinh,sqrt,tan,tgamma";
     }
 
     @Override
     public String getStringFunctions() throws SQLException {
+        // took from below URLs(not from system.functions):
+        // https://clickhouse.com/docs/en/sql-reference/functions/string-functions/
+        // https://clickhouse.com/docs/en/sql-reference/functions/string-search-functions/
+        // https://clickhouse.com/docs/en/sql-reference/functions/string-replace-functions/
         return "appendTrailingCharIfAbsent,base64Decode,base64Encode,char_length,CHAR_LENGTH,character_length,CHARACTER_LENGTH,concat,concatAssumeInjective,convertCharset,countMatches,countSubstrings,countSubstringsCaseInsensitive,countSubstringsCaseInsensitiveUTF8,CRC32,CRC32IEEE,CRC64,decodeXMLComponent,empty,encodeXMLComponent,endsWith,extract,extractAll,extractAllGroupsHorizontal,extractAllGroupsVertical,extractTextFromHTML ,format,ilike,isValidUTF8,lcase,leftPad,leftPadUTF8,length,lengthUTF8,like,locate,lower,lowerUTF8,match,mid,multiFuzzyMatchAllIndices,multiFuzzyMatchAny,multiFuzzyMatchAnyIndex,multiMatchAllIndices,multiMatchAny,multiMatchAnyIndex,multiSearchAllPositions,multiSearchAllPositionsUTF8,multiSearchAny,multiSearchFirstIndex,multiSearchFirstPosition,ngramDistance,ngramSearch,normalizedQueryHash,normalizeQuery,notEmpty,notLike,position,positionCaseInsensitive,positionCaseInsensitiveUTF8,positionUTF8,regexpQuoteMeta,repeat,replace,replaceAll,replaceOne,replaceRegexpAll,replaceRegexpOne,reverse,reverseUTF8,rightPad,rightPadUTF8,startsWith,substr,substring,substringUTF8,tokens,toValidUTF8,trim,trimBoth,trimLeft,trimRight,tryBase64Decode,ucase,upper,upperUTF8";
     }
 
     @Override
     public String getSystemFunctions() throws SQLException {
+        // took from below URL(not from system.functions):
+        // https://clickhouse.com/docs/en/sql-reference/functions/other-functions/
         return "bar,basename,blockNumber,blockSerializedSize,blockSize,buildId,byteSize,countDigits,currentDatabase,currentProfiles,currentRoles,currentUser,defaultProfiles,defaultRoles,defaultValueOfArgumentType,defaultValueOfTypeName,dumpColumnStructure,enabledProfiles,enabledRoles,errorCodeToName,filesystemAvailable,filesystemCapacity,filesystemFree,finalizeAggregation,formatReadableQuantity,formatReadableSize,formatReadableTimeDelta,FQDN,getMacro,getServerPort,getSetting,getSizeOfEnumType,greatest,hasColumnInTable,hostName,identity,ifNotFinite,ignore,indexHint,initializeAggregation,initialQueryID,isConstant,isDecimalOverflow,isFinite,isInfinite,isNaN,joinGet,least,MACNumToString,MACStringToNum,MACStringToOUI,materialize,modelEvaluate,neighbor,queryID,randomFixedString,randomPrintableASCII,randomString,randomStringUTF8,replicate,rowNumberInAllBlocks,rowNumberInBlock,runningAccumulate,runningConcurrency,runningDifference,runningDifferenceStartingWithFirstValue,shardCount ,shardNum,sleep,sleepEachRow,tcpPort,throwIf,toColumnTypeName,toTypeName,transform,uptime,version,visibleWidth";
     }
 
     @Override
     public String getTimeDateFunctions() throws SQLException {
+        // took from below URL(not from system.functions):
+        // https://clickhouse.com/docs/en/sql-reference/functions/date-time-functions/
         return "addDays,addHours,addMinutes,addMonths,addQuarters,addSeconds,addWeeks,addYears,date_add,date_diff,date_sub,date_trunc,dateName,formatDateTime,FROM_UNIXTIME,fromModifiedJulianDay,fromModifiedJulianDayOrNull,now,subtractDays,subtractHours,subtractMinutes,subtractMonths,subtractQuarters,subtractSeconds,subtractWeeks,subtractYears,timeSlot,timeSlots,timestamp_add,timestamp_sub,timeZone,timeZoneOf,timeZoneOffset,today,toDayOfMonth,toDayOfWeek,toDayOfYear,toHour,toISOWeek,toISOYear,toMinute,toModifiedJulianDay,toModifiedJulianDayOrNull,toMonday,toMonth,toQuarter,toRelativeDayNum,toRelativeHourNum,toRelativeMinuteNum,toRelativeMonthNum,toRelativeQuarterNum,toRelativeSecondNum,toRelativeWeekNum,toRelativeYearNum,toSecond,toStartOfDay,toStartOfFifteenMinutes,toStartOfFiveMinute,toStartOfHour,toStartOfInterval,toStartOfISOYear,toStartOfMinute,toStartOfMonth,toStartOfQuarter,toStartOfSecond,toStartOfTenMinutes,toStartOfWeek,toStartOfYear,toTime,toTimeZone,toUnixTimestamp,toWeek,toYear,toYearWeek,toYYYYMM,toYYYYMMDD,toYYYYMMDDhhmmss,yesterday";
     }
 
@@ -609,7 +623,12 @@ public class ChdbDatabaseMetaData implements DatabaseMetaData {
 
     @Override
     public ResultSet getProcedures(String catalog, String schemaPattern, String procedureNamePattern) throws SQLException {
-        return this.empty("PROCEDURE_CAT Nullable(String), PROCEDURE_SCHEM Nullable(String), RESERVED1 Nullable(String), RESERVED2 Nullable(String), RESERVED3 Nullable(String), PROCEDURE_NAME String, REMARKS String, PROCEDURE_TYPE Int16, SPECIFIC_NAME String");
+        return empty("PROCEDURE_CAT Nullable(String), PROCEDURE_SCHEM Nullable(String), "
+                + "PROCEDURE_NAME String, COLUMN_NAME String, COLUMN_TYPE Int16, "
+                + "DATA_TYPE Int32, TYPE_NAME String, PRECISION Int32, LENGTH Int32, "
+                + "SCALE Int16, RADIX Int16, NULLABLE Int16, REMARKS String, "
+                + "COLUMN_DEF Nullable(String), SQL_DATA_TYPE Int32, SQL_DATETIME_SUB Int32, "
+                + "CHAR_OCTET_LENGTH Int32, ORDINAL_POSITION Int32, IS_NULLABLE String, SPECIFIC_NAME String");
     }
 
     @Override
@@ -634,12 +653,14 @@ public class ChdbDatabaseMetaData implements DatabaseMetaData {
 
     @Override
     public ResultSet getTableTypes() throws SQLException {
+        // "TABLE", "VIEW", "SYSTEM TABLE", "GLOBAL TEMPORARY", "LOCAL TEMPORARY",
+        // "ALIAS", "SYNONYM".
         int len = TABLE_TYPES.length;
         Object[][] rows = new Object[len][];
-        for(int i = 0; i < len; ++i) {
+        for (int i = 0; i < len; i++) {
             rows[i] = new Object[]{TABLE_TYPES[i]};
         }
-        return this.fixed("TABLE_TYPE String", rows);
+        return fixed("TABLE_TYPE String", rows);
     }
 
     @Override
@@ -649,12 +670,15 @@ public class ChdbDatabaseMetaData implements DatabaseMetaData {
 
     @Override
     public ResultSet getColumnPrivileges(String catalog, String schema, String table, String columnNamePattern) throws SQLException {
-        return this.empty("TABLE_CAT Nullable(String), TABLE_SCHEM Nullable(String), TABLE_NAME String, COLUMN_NAME String, GRANTOR Nullable(String), GRANTEE String, PRIVILEGE String, IS_GRANTABLE Nullable(String)");
+        return empty("TABLE_CAT Nullable(String), TABLE_SCHEM Nullable(String), TABLE_NAME String, "
+                + "COLUMN_NAME String, GRANTOR Nullable(String), GRANTEE String, PRIVILEGE String, "
+                + "IS_GRANTABLE Nullable(String)");
     }
 
     @Override
     public ResultSet getTablePrivileges(String catalog, String schemaPattern, String tableNamePattern) throws SQLException {
-        return this.empty("TABLE_CAT Nullable(String), TABLE_SCHEM Nullable(String), TABLE_NAME String, GRANTOR Nullable(String), GRANTEE String, PRIVILEGE String, IS_GRANTABLE Nullable(String)");
+        return empty("TABLE_CAT Nullable(String), TABLE_SCHEM Nullable(String), TABLE_NAME String, "
+                + "GRANTOR Nullable(String), GRANTEE String, PRIVILEGE String, IS_GRANTABLE Nullable(String)");
     }
 
     @Override
@@ -664,17 +688,22 @@ public class ChdbDatabaseMetaData implements DatabaseMetaData {
 
     @Override
     public ResultSet getVersionColumns(String catalog, String schema, String table) throws SQLException {
-        return this.empty("SCOPE Int16, COLUMN_NAME String, DATA_TYPE Int32, TYPE_NAME String, COLUMN_SIZE Int32, BUFFER_LENGTH Int32, DECIMAL_DIGITS Int16, PSEUDO_COLUMN Int16");
+        return empty("SCOPE Int16, COLUMN_NAME String, DATA_TYPE Int32, TYPE_NAME String, "
+                + "COLUMN_SIZE Int32, BUFFER_LENGTH Int32, DECIMAL_DIGITS Int16, PSEUDO_COLUMN Int16");
     }
 
     @Override
     public ResultSet getPrimaryKeys(String catalog, String schema, String table) throws SQLException {
-        return this.empty("TABLE_CAT Nullable(String), TABLE_SCHEM Nullable(String), TABLE_NAME String, COLUMN_NAME String, KEY_SEQ Int16, PK_NAME String");
+        return empty("TABLE_CAT Nullable(String), TABLE_SCHEM Nullable(String), TABLE_NAME String, "
+                + "COLUMN_NAME String, KEY_SEQ Int16, PK_NAME String");
     }
 
     @Override
     public ResultSet getImportedKeys(String catalog, String schema, String table) throws SQLException {
-        return this.empty("PKTABLE_CAT Nullable(String), PKTABLE_SCHEM Nullable(String), PKTABLE_NAME String, PKCOLUMN_NAME String, FKTABLE_CAT Nullable(String), FKTABLE_SCHEM Nullable(String), FKTABLE_NAME String, FKCOLUMN_NAME String, KEY_SEQ Int16, UPDATE_RULE Int16, DELETE_RULE Int16, FK_NAME Nullable(String), PK_NAME Nullable(String), DEFERRABILITY Int16");
+        return empty("PKTABLE_CAT Nullable(String), PKTABLE_SCHEM Nullable(String), PKTABLE_NAME String, "
+                + "PKCOLUMN_NAME String, FKTABLE_CAT Nullable(String), FKTABLE_SCHEM Nullable(String), "
+                + "FKTABLE_NAME String, FKCOLUMN_NAME String, KEY_SEQ Int16, UPDATE_RULE Int16, "
+                + "DELETE_RULE Int16, FK_NAME Nullable(String), PK_NAME Nullable(String), DEFERRABILITY Int16");
     }
 
     @Override
@@ -684,7 +713,10 @@ public class ChdbDatabaseMetaData implements DatabaseMetaData {
 
     @Override
     public ResultSet getCrossReference(String parentCatalog, String parentSchema, String parentTable, String foreignCatalog, String foreignSchema, String foreignTable) throws SQLException {
-        return this.empty("PKTABLE_CAT Nullable(String), PKTABLE_SCHEM Nullable(String), PKTABLE_NAME String, PKCOLUMN_NAME String, FKTABLE_CAT Nullable(String), FKTABLE_SCHEM Nullable(String), FKTABLE_NAME String, FKCOLUMN_NAME String, KEY_SEQ Int16, UPDATE_RULE Int16, DELETE_RULE Int16, FK_NAME Nullable(String), PK_NAME Nullable(String), DEFERRABILITY Int16");
+        return empty("PKTABLE_CAT Nullable(String), PKTABLE_SCHEM Nullable(String), PKTABLE_NAME String, "
+                + "PKCOLUMN_NAME String, FKTABLE_CAT Nullable(String), FKTABLE_SCHEM Nullable(String), "
+                + "FKTABLE_NAME String, FKCOLUMN_NAME String, KEY_SEQ Int16, UPDATE_RULE Int16, "
+                + "DELETE_RULE Int16, FK_NAME Nullable(String), PK_NAME Nullable(String), DEFERRABILITY Int16");
     }
 
     @Override
@@ -759,7 +791,8 @@ public class ChdbDatabaseMetaData implements DatabaseMetaData {
 
     @Override
     public ResultSet getUDTs(String catalog, String schemaPattern, String typeNamePattern, int[] types) throws SQLException {
-        return this.empty("TYPE_CAT Nullable(String), TYPE_SCHEM Nullable(String), TYPE_NAME String, CLASS_NAME String, DATA_TYPE Int32, REMARKS String, BASE_TYPE Int16");
+        return empty("TYPE_CAT Nullable(String), TYPE_SCHEM Nullable(String), TYPE_NAME String, "
+                + "CLASS_NAME String, DATA_TYPE Int32, REMARKS String, BASE_TYPE Int16");
     }
 
     @Override
@@ -789,17 +822,24 @@ public class ChdbDatabaseMetaData implements DatabaseMetaData {
 
     @Override
     public ResultSet getSuperTypes(String catalog, String schemaPattern, String typeNamePattern) throws SQLException {
-        return this.empty("TYPE_CAT Nullable(String), TYPE_SCHEM Nullable(String), TYPE_NAME String, SUPERTYPE_CAT Nullable(String), SUPERTYPE_SCHEM Nullable(String), SUPERTYPE_NAME String");
+        return empty("TYPE_CAT Nullable(String), TYPE_SCHEM Nullable(String), TYPE_NAME String, "
+                + "SUPERTYPE_CAT Nullable(String), SUPERTYPE_SCHEM Nullable(String), SUPERTYPE_NAME String");
     }
 
     @Override
     public ResultSet getSuperTables(String catalog, String schemaPattern, String tableNamePattern) throws SQLException {
-        return this.empty("TABLE_CAT Nullable(String), TABLE_SCHEM Nullable(String), TABLE_NAME String, SUPERTABLE_NAME String");
+        return empty(
+                "TABLE_CAT Nullable(String), TABLE_SCHEM Nullable(String), TABLE_NAME String, SUPERTABLE_NAME String");
     }
 
     @Override
     public ResultSet getAttributes(String catalog, String schemaPattern, String typeNamePattern, String attributeNamePattern) throws SQLException {
-        return this.empty("TYPE_CAT Nullable(String), TYPE_SCHEM Nullable(String), TYPE_NAME String, ATTR_NAME String, DATA_TYPE Int32, ATTR_TYPE_NAME String, ATTR_SIZE Int32, DECIMAL_DIGITS Int32, NUM_PREC_RADIX Int32, NULLABLE Int32, REMARKS Nullable(String), ATTR_DEF Nullable(String), SQL_DATA_TYPE Int32, SQL_DATETIME_SUB Int32, CHAR_OCTET_LENGTH Int32, ORDINAL_POSITION Int32, IS_NULLABLE String, SCOPE_CATALOG String, SCOPE_SCHEMA String, SCOPE_TABLE String, SOURCE_DATA_TYPE Int16");
+        return empty("TYPE_CAT Nullable(String), TYPE_SCHEM Nullable(String), TYPE_NAME String, "
+                + "ATTR_NAME String, DATA_TYPE Int32, ATTR_TYPE_NAME String, ATTR_SIZE Int32, "
+                + "DECIMAL_DIGITS Int32, NUM_PREC_RADIX Int32, NULLABLE Int32, REMARKS Nullable(String), "
+                + "ATTR_DEF Nullable(String), SQL_DATA_TYPE Int32, SQL_DATETIME_SUB Int32, "
+                + "CHAR_OCTET_LENGTH Int32, ORDINAL_POSITION Int32, IS_NULLABLE String, "
+                + "SCOPE_CATALOG String, SCOPE_SCHEMA String, SCOPE_TABLE String, SOURCE_DATA_TYPE Int16");
     }
 
     @Override
@@ -834,7 +874,7 @@ public class ChdbDatabaseMetaData implements DatabaseMetaData {
 
     @Override
     public int getSQLStateType() throws SQLException {
-        return 2;
+        return sqlStateSQL;
     }
 
     @Override
@@ -879,12 +919,18 @@ public class ChdbDatabaseMetaData implements DatabaseMetaData {
 
     @Override
     public ResultSet getFunctionColumns(String catalog, String schemaPattern, String functionNamePattern, String columnNamePattern) throws SQLException {
-        return this.empty("FUNCTION_CAT Nullable(String), FUNCTION_SCHEM Nullable(String), FUNCTION_NAME String,COLUMN_NAME String, COLUMN_TYPE Int16, DATA_TYPE Int32, TYPE_NAME String, PRECISION Int32,LENGTH Int32, SCALE Int16, RADIX Int16, NULLABLE Int16, REMARKS String, CHAR_OCTET_LENGTH Int32,ORDINAL_POSITION Int32, IS_NULLABLE String, SPECIFIC_NAME String");
+        return empty("FUNCTION_CAT Nullable(String), FUNCTION_SCHEM Nullable(String), FUNCTION_NAME String,"
+                + "COLUMN_NAME String, COLUMN_TYPE Int16, DATA_TYPE Int32, TYPE_NAME String, PRECISION Int32,"
+                + "LENGTH Int32, SCALE Int16, RADIX Int16, NULLABLE Int16, REMARKS String, CHAR_OCTET_LENGTH Int32,"
+                + "ORDINAL_POSITION Int32, IS_NULLABLE String, SPECIFIC_NAME String");
     }
 
     @Override
     public ResultSet getPseudoColumns(String catalog, String schemaPattern, String tableNamePattern, String columnNamePattern) throws SQLException {
-        return this.empty("TABLE_CAT Nullable(String), TABLE_SCHEM Nullable(String), TABLE_NAME String, COLUMN_NAME String, DATA_TYPE Int32, COLUMN_SIZE Int32, DECIMAL_DIGITS Int32, NUM_PREC_RADIX Int32, COLUMN_USAGE String, REMARKS Nullable(String), CHAR_OCTET_LENGTH Int32, IS_NULLABLE String");
+        return empty("TABLE_CAT Nullable(String), TABLE_SCHEM Nullable(String), TABLE_NAME String, "
+                + "COLUMN_NAME String, DATA_TYPE Int32, COLUMN_SIZE Int32, DECIMAL_DIGITS Int32, "
+                + "NUM_PREC_RADIX Int32, COLUMN_USAGE String, REMARKS Nullable(String), "
+                + "CHAR_OCTET_LENGTH Int32, IS_NULLABLE String");
     }
 
     @Override
