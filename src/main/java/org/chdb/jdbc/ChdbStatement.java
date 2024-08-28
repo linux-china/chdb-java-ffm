@@ -15,12 +15,15 @@ public class ChdbStatement implements Statement {
     @Override
     public ResultSet executeQuery(String sql) throws SQLException {
         QueryResultV2 resultV2 = Chdb.query(sql);
-        return new ChdbResultSet(this, resultV2.toJsonResult());
+        if (resultV2.getErrorMessage() != null) {
+            throw new SQLException(resultV2.getErrorMessage());
+        }
+        return new ChdbResultSet(this, sql, resultV2.toJsonResult());
     }
 
     @Override
     public int executeUpdate(String sql) throws SQLException {
-        return 0;
+        throw new SQLException("Not support now");
     }
 
     @Override
