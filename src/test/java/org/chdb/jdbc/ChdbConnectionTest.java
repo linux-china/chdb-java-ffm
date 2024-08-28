@@ -16,10 +16,22 @@ public class ChdbConnectionTest {
     }
 
     @Test
-    public void testConnection() throws SQLException {
+    public void testStatement() throws SQLException {
         String sql = "select * from file('src/test/resources/logs.csv','CSV')";
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
+        while (resultSet.next()) {
+            System.out.println(resultSet.getString("level"));
+        }
+    }
+
+    @Test
+    public void testPreparedStatement() throws SQLException {
+        String sql = "select * from file('src/test/resources/logs.csv','CSV') where level = ? and id > 0";
+        ChdbPreparedStatement statement = (ChdbPreparedStatement) conn.prepareStatement(sql);
+        statement.setString(1, "error");
+        System.out.println(statement.getRealSQL());
+        ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
             System.out.println(resultSet.getString("level"));
         }
