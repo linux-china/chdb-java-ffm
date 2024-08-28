@@ -15,11 +15,11 @@ public class Chdb {
     public static QueryResultV2 query(String sql) {
         MemorySegment result = null;
         try (Arena arena = Arena.ofShared()) {
-            MemorySegment pointers = arena.allocate(ValueLayout.ADDRESS, 3);
-            pointers.setAtIndex(ValueLayout.ADDRESS, 0, arena.allocateFrom("clickhouse"));
-            pointers.setAtIndex(ValueLayout.ADDRESS, 1, arena.allocateFrom("--format=JSON"));
-            pointers.setAtIndex(ValueLayout.ADDRESS, 2, arena.allocateFrom("--query=" + sql));
-            result = LibChdb.query_stable_v2(3, pointers);
+            MemorySegment parameters = arena.allocate(ValueLayout.ADDRESS, 3);
+            parameters.setAtIndex(ValueLayout.ADDRESS, 0, arena.allocateFrom("clickhouse"));
+            parameters.setAtIndex(ValueLayout.ADDRESS, 1, arena.allocateFrom("--format=JSON"));
+            parameters.setAtIndex(ValueLayout.ADDRESS, 2, arena.allocateFrom("--query=" + sql));
+            result = LibChdb.query_stable_v2(3, parameters);
             MemorySegment errorMessage = local_result_v2.error_message(result);
             if (errorMessage.address() > 0) {
                 String errorMessageText = errorMessage.getString(0);
