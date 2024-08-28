@@ -1,6 +1,7 @@
 package org.chdb.jdbc;
 
 import org.chdb.result.*;
+import org.jspecify.annotations.*;
 
 import java.io.*;
 import java.math.*;
@@ -37,6 +38,38 @@ public class ChdbResultSet implements ResultSet {
             cols[i] = columnInfoList.get(i).name();
             colsMeta[i] = columnInfoList.get(i).type();
         }
+    }
+
+    /**
+     * construct result set from columns and values
+     *
+     * @param statement statement
+     * @param sql       sql
+     * @param columns   columns, format as `TABLE_CAT Nullable(String), TABLE_SCHEMA Nullable(String), TABLE_NAME String`
+     * @param values    dataset
+     */
+    public ChdbResultSet(Statement statement, String sql, String columns, @Nullable Object[][] values) {
+        this.statement = statement;
+        this.sql = sql;
+        String[] pairs = columns.split(",");
+        this.cols = new String[pairs.length];
+        this.colsMeta = new String[pairs.length];
+        for (int i = 0; i < pairs.length; i++) {
+            String[] parts = pairs[i].trim().split(" ", 2);
+            cols[i] = parts[0].trim();
+            colsMeta[i] = parts[1].trim();
+        }
+        this.rows = new ArrayList<>();
+        if (values != null) {
+            for (Object[] row : values) {
+                Map<String, Object> rowMap = new HashMap<>();
+                for (int i = 0; i < row.length; i++) {
+                    rowMap.put(cols[i], row[i]);
+                }
+                rows.add(rowMap);
+            }
+        }
+        this.maxRows = rows.size();
     }
 
     public Map<String, Object> getCurrentRow() {
