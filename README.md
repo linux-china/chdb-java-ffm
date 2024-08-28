@@ -69,7 +69,9 @@ Yes, you can use `JdbcTemplate` with chdb-java-ffm.
 
 ### How it works?
 
-Java -> FFM -> chdb -> JSON Output -> ResultSet.
+Java -> FFM -> chdb(embedded) -> JSON Output -> ResultSet.
+
+**Attention**: chdb-java-ffm uses Jackson for JSON parsing.
 
 # References
 
