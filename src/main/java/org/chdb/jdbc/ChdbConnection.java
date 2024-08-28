@@ -26,7 +26,7 @@ public class ChdbConnection implements Connection {
 
     @Override
     public PreparedStatement prepareStatement(String sql) throws SQLException {
-        throw new SQLException("Not supported");
+        return new ChdbPreparedStatement(this, sql);
     }
 
     @Override
