@@ -5,12 +5,16 @@ import org.chdb.result.*;
 import java.io.*;
 import java.math.*;
 import java.net.*;
-import java.sql.*;
 import java.sql.Date;
+import java.sql.*;
 import java.time.*;
 import java.util.*;
 
-
+/**
+ * chdb JDBC ResultSet
+ *
+ * @author linux_china
+ */
 public class ChdbResultSet implements ResultSet {
     private final Statement statement;
     private final String sql;

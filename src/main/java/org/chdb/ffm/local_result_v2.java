@@ -2,18 +2,14 @@
 
 package org.chdb.ffm;
 
-import java.lang.invoke.*;
 import java.lang.foreign.*;
-import java.nio.ByteOrder;
-import java.util.*;
 import java.util.function.*;
-import java.util.stream.*;
 
-import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.PathElement.*;
+import static java.lang.foreign.ValueLayout.*;
 
 /**
- * {@snippet lang=c :
+ * {@snippet lang = c:
  * struct local_result_v2 {
  *     char *buf;
  *     size_t len;
@@ -23,7 +19,7 @@ import static java.lang.foreign.MemoryLayout.PathElement.*;
  *     uint64_t bytes_read;
  *     char *error_message;
  * }
- * }
+ *}
  */
 public class local_result_v2 {
 
@@ -32,13 +28,13 @@ public class local_result_v2 {
     }
 
     private static final GroupLayout $LAYOUT = MemoryLayout.structLayout(
-        LibChdb.C_POINTER.withName("buf"),
-        LibChdb.C_LONG.withName("len"),
-        LibChdb.C_POINTER.withName("_vec"),
-        LibChdb.C_DOUBLE.withName("elapsed"),
-        LibChdb.C_LONG_LONG.withName("rows_read"),
-        LibChdb.C_LONG_LONG.withName("bytes_read"),
-        LibChdb.C_POINTER.withName("error_message")
+            LibChdb.C_POINTER.withName("buf"),
+            LibChdb.C_LONG.withName("len"),
+            LibChdb.C_POINTER.withName("_vec"),
+            LibChdb.C_DOUBLE.withName("elapsed"),
+            LibChdb.C_LONG_LONG.withName("rows_read"),
+            LibChdb.C_LONG_LONG.withName("bytes_read"),
+            LibChdb.C_POINTER.withName("error_message")
     ).withName("local_result_v2");
 
     /**
@@ -48,13 +44,13 @@ public class local_result_v2 {
         return $LAYOUT;
     }
 
-    private static final AddressLayout buf$LAYOUT = (AddressLayout)$LAYOUT.select(groupElement("buf"));
+    private static final AddressLayout buf$LAYOUT = (AddressLayout) $LAYOUT.select(groupElement("buf"));
 
     /**
      * Layout for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * char *buf
-     * }
+     *}
      */
     public static final AddressLayout buf$layout() {
         return buf$LAYOUT;
@@ -64,9 +60,9 @@ public class local_result_v2 {
 
     /**
      * Offset for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * char *buf
-     * }
+     *}
      */
     public static final long buf$offset() {
         return buf$OFFSET;
@@ -74,9 +70,9 @@ public class local_result_v2 {
 
     /**
      * Getter for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * char *buf
-     * }
+     *}
      */
     public static MemorySegment buf(MemorySegment struct) {
         return struct.get(buf$LAYOUT, buf$OFFSET);
@@ -84,21 +80,21 @@ public class local_result_v2 {
 
     /**
      * Setter for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * char *buf
-     * }
+     *}
      */
     public static void buf(MemorySegment struct, MemorySegment fieldValue) {
         struct.set(buf$LAYOUT, buf$OFFSET, fieldValue);
     }
 
-    private static final OfLong len$LAYOUT = (OfLong)$LAYOUT.select(groupElement("len"));
+    private static final OfLong len$LAYOUT = (OfLong) $LAYOUT.select(groupElement("len"));
 
     /**
      * Layout for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * size_t len
-     * }
+     *}
      */
     public static final OfLong len$layout() {
         return len$LAYOUT;
@@ -108,9 +104,9 @@ public class local_result_v2 {
 
     /**
      * Offset for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * size_t len
-     * }
+     *}
      */
     public static final long len$offset() {
         return len$OFFSET;
@@ -118,9 +114,9 @@ public class local_result_v2 {
 
     /**
      * Getter for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * size_t len
-     * }
+     *}
      */
     public static long len(MemorySegment struct) {
         return struct.get(len$LAYOUT, len$OFFSET);
@@ -128,21 +124,21 @@ public class local_result_v2 {
 
     /**
      * Setter for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * size_t len
-     * }
+     *}
      */
     public static void len(MemorySegment struct, long fieldValue) {
         struct.set(len$LAYOUT, len$OFFSET, fieldValue);
     }
 
-    private static final AddressLayout _vec$LAYOUT = (AddressLayout)$LAYOUT.select(groupElement("_vec"));
+    private static final AddressLayout _vec$LAYOUT = (AddressLayout) $LAYOUT.select(groupElement("_vec"));
 
     /**
      * Layout for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * void *_vec
-     * }
+     *}
      */
     public static final AddressLayout _vec$layout() {
         return _vec$LAYOUT;
@@ -152,9 +148,9 @@ public class local_result_v2 {
 
     /**
      * Offset for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * void *_vec
-     * }
+     *}
      */
     public static final long _vec$offset() {
         return _vec$OFFSET;
@@ -162,9 +158,9 @@ public class local_result_v2 {
 
     /**
      * Getter for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * void *_vec
-     * }
+     *}
      */
     public static MemorySegment _vec(MemorySegment struct) {
         return struct.get(_vec$LAYOUT, _vec$OFFSET);
@@ -172,21 +168,21 @@ public class local_result_v2 {
 
     /**
      * Setter for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * void *_vec
-     * }
+     *}
      */
     public static void _vec(MemorySegment struct, MemorySegment fieldValue) {
         struct.set(_vec$LAYOUT, _vec$OFFSET, fieldValue);
     }
 
-    private static final OfDouble elapsed$LAYOUT = (OfDouble)$LAYOUT.select(groupElement("elapsed"));
+    private static final OfDouble elapsed$LAYOUT = (OfDouble) $LAYOUT.select(groupElement("elapsed"));
 
     /**
      * Layout for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * double elapsed
-     * }
+     *}
      */
     public static final OfDouble elapsed$layout() {
         return elapsed$LAYOUT;
@@ -196,9 +192,9 @@ public class local_result_v2 {
 
     /**
      * Offset for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * double elapsed
-     * }
+     *}
      */
     public static final long elapsed$offset() {
         return elapsed$OFFSET;
@@ -206,9 +202,9 @@ public class local_result_v2 {
 
     /**
      * Getter for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * double elapsed
-     * }
+     *}
      */
     public static double elapsed(MemorySegment struct) {
         return struct.get(elapsed$LAYOUT, elapsed$OFFSET);
@@ -216,21 +212,21 @@ public class local_result_v2 {
 
     /**
      * Setter for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * double elapsed
-     * }
+     *}
      */
     public static void elapsed(MemorySegment struct, double fieldValue) {
         struct.set(elapsed$LAYOUT, elapsed$OFFSET, fieldValue);
     }
 
-    private static final OfLong rows_read$LAYOUT = (OfLong)$LAYOUT.select(groupElement("rows_read"));
+    private static final OfLong rows_read$LAYOUT = (OfLong) $LAYOUT.select(groupElement("rows_read"));
 
     /**
      * Layout for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * uint64_t rows_read
-     * }
+     *}
      */
     public static final OfLong rows_read$layout() {
         return rows_read$LAYOUT;
@@ -240,9 +236,9 @@ public class local_result_v2 {
 
     /**
      * Offset for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * uint64_t rows_read
-     * }
+     *}
      */
     public static final long rows_read$offset() {
         return rows_read$OFFSET;
@@ -250,9 +246,9 @@ public class local_result_v2 {
 
     /**
      * Getter for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * uint64_t rows_read
-     * }
+     *}
      */
     public static long rows_read(MemorySegment struct) {
         return struct.get(rows_read$LAYOUT, rows_read$OFFSET);
@@ -260,21 +256,21 @@ public class local_result_v2 {
 
     /**
      * Setter for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * uint64_t rows_read
-     * }
+     *}
      */
     public static void rows_read(MemorySegment struct, long fieldValue) {
         struct.set(rows_read$LAYOUT, rows_read$OFFSET, fieldValue);
     }
 
-    private static final OfLong bytes_read$LAYOUT = (OfLong)$LAYOUT.select(groupElement("bytes_read"));
+    private static final OfLong bytes_read$LAYOUT = (OfLong) $LAYOUT.select(groupElement("bytes_read"));
 
     /**
      * Layout for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * uint64_t bytes_read
-     * }
+     *}
      */
     public static final OfLong bytes_read$layout() {
         return bytes_read$LAYOUT;
@@ -284,9 +280,9 @@ public class local_result_v2 {
 
     /**
      * Offset for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * uint64_t bytes_read
-     * }
+     *}
      */
     public static final long bytes_read$offset() {
         return bytes_read$OFFSET;
@@ -294,9 +290,9 @@ public class local_result_v2 {
 
     /**
      * Getter for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * uint64_t bytes_read
-     * }
+     *}
      */
     public static long bytes_read(MemorySegment struct) {
         return struct.get(bytes_read$LAYOUT, bytes_read$OFFSET);
@@ -304,21 +300,21 @@ public class local_result_v2 {
 
     /**
      * Setter for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * uint64_t bytes_read
-     * }
+     *}
      */
     public static void bytes_read(MemorySegment struct, long fieldValue) {
         struct.set(bytes_read$LAYOUT, bytes_read$OFFSET, fieldValue);
     }
 
-    private static final AddressLayout error_message$LAYOUT = (AddressLayout)$LAYOUT.select(groupElement("error_message"));
+    private static final AddressLayout error_message$LAYOUT = (AddressLayout) $LAYOUT.select(groupElement("error_message"));
 
     /**
      * Layout for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * char *error_message
-     * }
+     *}
      */
     public static final AddressLayout error_message$layout() {
         return error_message$LAYOUT;
@@ -328,9 +324,9 @@ public class local_result_v2 {
 
     /**
      * Offset for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * char *error_message
-     * }
+     *}
      */
     public static final long error_message$offset() {
         return error_message$OFFSET;
@@ -338,9 +334,9 @@ public class local_result_v2 {
 
     /**
      * Getter for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * char *error_message
-     * }
+     *}
      */
     public static MemorySegment error_message(MemorySegment struct) {
         return struct.get(error_message$LAYOUT, error_message$OFFSET);
@@ -348,9 +344,9 @@ public class local_result_v2 {
 
     /**
      * Setter for field:
-     * {@snippet lang=c :
+     * {@snippet lang = c:
      * char *error_message
-     * }
+     *}
      */
     public static void error_message(MemorySegment struct, MemorySegment fieldValue) {
         struct.set(error_message$LAYOUT, error_message$OFFSET, fieldValue);
@@ -367,7 +363,9 @@ public class local_result_v2 {
     /**
      * The size (in bytes) of this struct
      */
-    public static long sizeof() { return layout().byteSize(); }
+    public static long sizeof() {
+        return layout().byteSize();
+    }
 
     /**
      * Allocate a segment of size {@code layout().byteSize()} using {@code allocator}

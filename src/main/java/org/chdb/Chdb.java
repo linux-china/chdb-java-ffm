@@ -5,6 +5,11 @@ import org.chdb.result.*;
 
 import java.lang.foreign.*;
 
+/**
+ * chdb facade for FFM
+ *
+ * @author linux_china
+ */
 public class Chdb {
 
     public static QueryResultV2 query(String sql) {

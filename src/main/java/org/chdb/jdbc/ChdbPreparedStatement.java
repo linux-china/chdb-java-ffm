@@ -6,8 +6,8 @@ import org.chdb.result.*;
 import java.io.*;
 import java.math.*;
 import java.net.*;
-import java.sql.*;
 import java.sql.Date;
+import java.sql.*;
 import java.util.*;
 
 
@@ -450,12 +450,12 @@ public class ChdbPreparedStatement implements PreparedStatement {
 
     @Override
     public int getResultSetConcurrency() throws SQLException {
-        return 0;
+        return ResultSet.CONCUR_READ_ONLY;
     }
 
     @Override
     public int getResultSetType() throws SQLException {
-        return 0;
+        return ResultSet.TYPE_FORWARD_ONLY;
     }
 
     @Override

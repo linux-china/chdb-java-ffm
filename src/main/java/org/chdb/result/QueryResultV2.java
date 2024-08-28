@@ -2,6 +2,11 @@ package org.chdb.result;
 
 import com.fasterxml.jackson.databind.*;
 
+/**
+ * query result from chdb.h
+ *
+ * @author linux_china
+ */
 public class QueryResultV2 {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     private long byteCount;

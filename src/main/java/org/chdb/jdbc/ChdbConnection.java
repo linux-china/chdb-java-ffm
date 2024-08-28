@@ -9,7 +9,6 @@ import java.util.concurrent.*;
  *
  * @author linux_china
  */
-
 public class ChdbConnection implements Connection {
     private final String url;
     private Properties info;

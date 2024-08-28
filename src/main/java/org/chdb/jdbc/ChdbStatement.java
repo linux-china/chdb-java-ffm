@@ -5,6 +5,11 @@ import org.chdb.result.*;
 
 import java.sql.*;
 
+/**
+ * chdb JDBC statement, now only query support
+ *
+ * @author linux_china
+ */
 public class ChdbStatement implements Statement {
     private final ChdbConnection connection;
 

@@ -2,6 +2,13 @@ package org.chdb.jdbc;
 
 import java.sql.*;
 
+/**
+ * jdbc param
+ *
+ * @param sqlType    sql type from Types.xxx
+ * @param valueClass value class
+ * @param value      value
+ */
 public record JdbcParam(int sqlType, Class<?> valueClass, Object value) {
 
     public String getLiteralValue() {

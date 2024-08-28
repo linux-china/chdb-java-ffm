@@ -2,6 +2,11 @@ package org.chdb.jdbc;
 
 import java.sql.*;
 
+/**
+ * chdb ResultSetMetaData for columns meta data
+ *
+ * @author linux_china
+ */
 public class ChdbResultSetMetaData implements ResultSetMetaData {
     public String[] cols;
     public String[] colsMeta;
