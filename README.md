@@ -1,6 +1,8 @@
 chdb Java FFM binding
 ======================
 
+chdb-java-ffm is Java 22+ [JEP 454: Foreign Function & Memory API](https://openjdk.org/jeps/454) bind for [chdb](https://github.com/chdb-io).
+
 # Get started
 
 - Please add the following dependency to `pom.xml`:
@@ -52,6 +54,18 @@ public class ChdbConnectionTest {
 ### How to load dynamic library from other path?
 
 Execute `ln -s /usr/local/lib/libchdb.so libchdb.dylib` to link the dynamic library to the current directory.
+
+### Update operation support?
+
+Now only query support, and update will be implemented in the future.
+
+### PreparedStatement support?
+
+Now PreparedStatement implement is not real, just fake implement friendly for libraries and frameworks.
+
+### Spring Jdbc support?
+
+Yes, you can use `JdbcTemplate` with chdb-java-ffm. 
 
 # References
 
