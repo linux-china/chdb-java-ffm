@@ -454,12 +454,12 @@ public class ChdbResultSet implements ResultSet {
 
     @Override
     public void setFetchDirection(int direction) throws SQLException {
-        throw new SQLException("Not support");
+        throw new SQLFeatureNotSupportedException("FetchDirection");
     }
 
     @Override
     public int getFetchDirection() throws SQLException {
-        return 0;
+        return ResultSet.FETCH_FORWARD;
     }
 
     @Override
@@ -479,7 +479,7 @@ public class ChdbResultSet implements ResultSet {
 
     @Override
     public int getConcurrency() throws SQLException {
-        return 0;
+        return ResultSet.CONCUR_READ_ONLY;
     }
 
     @Override
@@ -879,7 +879,7 @@ public class ChdbResultSet implements ResultSet {
 
     @Override
     public int getHoldability() throws SQLException {
-        return 0;
+        return ResultSet.HOLD_CURSORS_OVER_COMMIT;
     }
 
     @Override

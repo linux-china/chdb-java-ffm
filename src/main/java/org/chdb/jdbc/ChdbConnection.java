@@ -24,12 +24,14 @@ public class ChdbConnection implements Connection {
 
     @Override
     public Statement createStatement() throws SQLException {
-        return new ChdbStatement(this);
+        return createStatement(ResultSet.TYPE_FORWARD_ONLY,
+                ResultSet.CONCUR_READ_ONLY,
+                ResultSet.HOLD_CURSORS_OVER_COMMIT);
     }
 
     @Override
     public PreparedStatement prepareStatement(String sql) throws SQLException {
-        return new ChdbPreparedStatement(this, sql);
+        return this.prepareStatement(sql, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
     }
 
     @Override
@@ -84,7 +86,7 @@ public class ChdbConnection implements Connection {
 
     @Override
     public boolean isReadOnly() throws SQLException {
-        return false;
+        return true;
     }
 
     @Override
@@ -104,7 +106,7 @@ public class ChdbConnection implements Connection {
 
     @Override
     public int getTransactionIsolation() throws SQLException {
-        return 0;
+        return Connection.TRANSACTION_NONE;
     }
 
     @Override
@@ -119,17 +121,17 @@ public class ChdbConnection implements Connection {
 
     @Override
     public Statement createStatement(int resultSetType, int resultSetConcurrency) throws SQLException {
-        throw new SQLException("Not supported");
+        return this.createStatement(resultSetType, resultSetConcurrency, ResultSet.HOLD_CURSORS_OVER_COMMIT);
     }
 
     @Override
     public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency) throws SQLException {
-        throw new SQLException("Not supported");
+        return this.prepareStatement(sql, resultSetType, resultSetConcurrency, ResultSet.HOLD_CURSORS_OVER_COMMIT);
     }
 
     @Override
     public CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency) throws SQLException {
-        throw new SQLException("Not supported");
+        throw new SQLFeatureNotSupportedException("prepareCall");
     }
 
     @Override
@@ -154,12 +156,12 @@ public class ChdbConnection implements Connection {
 
     @Override
     public Savepoint setSavepoint() throws SQLException {
-        return null;
+        throw new SQLFeatureNotSupportedException("savePoint");
     }
 
     @Override
     public Savepoint setSavepoint(String name) throws SQLException {
-        return null;
+        throw new SQLFeatureNotSupportedException("savePoint");
     }
 
     @Override
@@ -174,17 +176,17 @@ public class ChdbConnection implements Connection {
 
     @Override
     public Statement createStatement(int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
-        throw new SQLException("Not supported");
+        return new ChdbStatement(this);
     }
 
     @Override
     public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
-        return null;
+        return new ChdbPreparedStatement(this, sql);
     }
 
     @Override
     public CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
-        return null;
+        throw new SQLFeatureNotSupportedException("prepareCall");
     }
 
     @Override

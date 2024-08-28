@@ -58,7 +58,7 @@ public class ChdbPreparedStatement implements PreparedStatement {
 
     @Override
     public int executeUpdate() throws SQLException {
-        throw new SQLException("Not support");
+        throw new SQLFeatureNotSupportedException("update");
     }
 
     @Override
@@ -113,7 +113,7 @@ public class ChdbPreparedStatement implements PreparedStatement {
 
     @Override
     public void setBytes(int parameterIndex, byte[] x) throws SQLException {
-        throw new SQLException("Not Support");
+        throw new SQLFeatureNotSupportedException("setBytes");
     }
 
     @Override
@@ -153,7 +153,7 @@ public class ChdbPreparedStatement implements PreparedStatement {
 
     @Override
     public void setObject(int parameterIndex, Object x, int targetSqlType) throws SQLException {
-        params.add(parameterIndex - 1, new JdbcParam(targetSqlType, Object.class, x));
+        params.add(parameterIndex - 1, new JdbcParam(targetSqlType, x.getClass(), x));
     }
 
     @Override
@@ -169,18 +169,19 @@ public class ChdbPreparedStatement implements PreparedStatement {
             case Date o -> setDate(parameterIndex, o);
             case Time o -> setTime(parameterIndex, o);
             case Timestamp o -> setTimestamp(parameterIndex, o);
+            case URL url -> setURL(parameterIndex, url);
             default -> throw new SQLException("Not support");
         }
     }
 
     @Override
     public boolean execute() throws SQLException {
-        throw new SQLException("Not support");
+        throw new SQLFeatureNotSupportedException("execute");
     }
 
     @Override
     public void addBatch() throws SQLException {
-        throw new SQLException("Not support");
+        throw new SQLFeatureNotSupportedException("batch");
     }
 
     @Override
@@ -210,7 +211,7 @@ public class ChdbPreparedStatement implements PreparedStatement {
 
     @Override
     public ResultSetMetaData getMetaData() throws SQLException {
-        throw new SQLException("Not support");
+        throw new SQLFeatureNotSupportedException("metadata for PreparedStatement");
     }
 
     @Override
@@ -235,7 +236,7 @@ public class ChdbPreparedStatement implements PreparedStatement {
 
     @Override
     public void setURL(int parameterIndex, URL x) throws SQLException {
-
+        this.setString(parameterIndex, x.toString());
     }
 
     @Override
@@ -340,12 +341,12 @@ public class ChdbPreparedStatement implements PreparedStatement {
 
     @Override
     public ResultSet executeQuery(String sql) throws SQLException {
-        throw new SQLException("Not support");
+        throw new SQLFeatureNotSupportedException("executeQuery for PreparedStatement");
     }
 
     @Override
     public int executeUpdate(String sql) throws SQLException {
-        throw new SQLException("Not support");
+        throw new SQLFeatureNotSupportedException("update for PreparedStatement");
     }
 
     @Override
@@ -410,12 +411,12 @@ public class ChdbPreparedStatement implements PreparedStatement {
 
     @Override
     public boolean execute(String sql) throws SQLException {
-        throw new SQLException("Not support");
+        throw new SQLFeatureNotSupportedException("execute for PreparedStatement");
     }
 
     @Override
     public ResultSet getResultSet() throws SQLException {
-        throw new SQLException("Not support");
+        throw new SQLFeatureNotSupportedException("getResultSet for PreparedStatement");
     }
 
     @Override

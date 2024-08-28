@@ -29,7 +29,7 @@ public class ChdbStatement implements Statement {
 
     @Override
     public int executeUpdate(String sql) throws SQLException {
-        throw new SQLException("Not support now");
+        throw new SQLFeatureNotSupportedException("update");
     }
 
     @Override
@@ -119,7 +119,7 @@ public class ChdbStatement implements Statement {
 
     @Override
     public int getFetchDirection() throws SQLException {
-        return 0;
+        return ResultSet.FETCH_FORWARD;
     }
 
     @Override
@@ -134,12 +134,12 @@ public class ChdbStatement implements Statement {
 
     @Override
     public int getResultSetConcurrency() throws SQLException {
-        return 0;
+        return ResultSet.CONCUR_READ_ONLY;
     }
 
     @Override
     public int getResultSetType() throws SQLException {
-        return 0;
+        return ResultSet.TYPE_FORWARD_ONLY;
     }
 
     @Override
@@ -159,7 +159,7 @@ public class ChdbStatement implements Statement {
 
     @Override
     public Connection getConnection() throws SQLException {
-        return null;
+        return this.connection;
     }
 
     @Override
