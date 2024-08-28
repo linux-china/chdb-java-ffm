@@ -15,8 +15,9 @@ public class ChdbStatement implements Statement {
     @Override
     public ResultSet executeQuery(String sql) throws SQLException {
         QueryResultV2 resultV2 = Chdb.query(sql);
-        if (resultV2.getErrorMessage() != null) {
-            throw new SQLException(resultV2.getErrorMessage());
+        String sqlError = resultV2.sqlError();
+        if (sqlError != null) {
+            throw new SQLException(sqlError);
         }
         return new ChdbResultSet(this, sql, resultV2.toJsonResult());
     }
