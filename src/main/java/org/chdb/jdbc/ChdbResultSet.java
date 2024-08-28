@@ -12,15 +12,17 @@ import java.util.*;
 
 
 public class ChdbResultSet implements ResultSet {
-    private final ChdbStatement statement;
+    private final Statement statement;
+    private final String sql;
     private final String[] cols;
     private final String[] colsMeta;
     private final List<Map<String, Object>> rows;
     private final int maxRows;
     private int row = -1;
 
-    public ChdbResultSet(ChdbStatement statement, QueryJsonResult queryResult) {
+    public ChdbResultSet(Statement statement, String sql, QueryJsonResult queryResult) {
         this.statement = statement;
+        this.sql = sql;
         this.rows = queryResult.data();
         this.maxRows = this.rows.size();
         List<ColumnInfo> columnInfoList = queryResult.meta();
@@ -35,6 +37,10 @@ public class ChdbResultSet implements ResultSet {
 
     public Map<String, Object> getCurrentRow() {
         return rows.get(row);
+    }
+
+    public String getSql() {
+        return sql;
     }
 
     @Override
