@@ -67,6 +67,10 @@ Now PreparedStatement implement is not real, just fake implement friendly for li
 
 Yes, you can use `JdbcTemplate` with chdb-java-ffm. 
 
+### How it works?
+
+Java -> FFM -> chdb -> JSON Output -> ResultSet.
+
 # References
 
 * [JEP 454](https://openjdk.org/jeps/454): Foreign Function & Memory API
