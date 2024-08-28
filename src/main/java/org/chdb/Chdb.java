@@ -29,8 +29,11 @@ public class Chdb {
             long rowCount = local_result_v2.rows_read(result);
             double elapsed = local_result_v2.elapsed(result);
             MemorySegment buf = local_result_v2.buf(result);
-            String output = buf.getString(0);
-            return new QueryResultV2(byteCount, rowCount, elapsed, output);
+            if (buf.address() > 0) {
+                String output = buf.getString(0).trim();
+                return new QueryResultV2(byteCount, rowCount, elapsed, output);
+            }
+            return QueryResultV2.error("No output found!");
         } finally {
             if (result != null) {
                 LibChdb.free_result_v2(result);
