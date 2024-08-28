@@ -18,6 +18,10 @@ public class ChdbConnection implements Connection {
         this.info = info;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
     @Override
     public Statement createStatement() throws SQLException {
         return new ChdbStatement(this);
@@ -70,8 +74,7 @@ public class ChdbConnection implements Connection {
 
     @Override
     public DatabaseMetaData getMetaData() throws SQLException {
-        // TODO implement
-        return null;
+        return new ChdbDatabaseMetaData(this);
     }
 
     @Override
