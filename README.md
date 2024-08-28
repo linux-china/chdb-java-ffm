@@ -1,5 +1,6 @@
 chdb Java FFM binding
 ======================
+![chdb Java](logo.png)
 
 chdb-java-ffm is Java 22+ [JEP 454: Foreign Function & Memory API](https://openjdk.org/jeps/454) bind for [chdb](https://github.com/chdb-io).
 
