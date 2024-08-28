@@ -61,6 +61,15 @@ public class QueryResultV2 {
         this.output = output;
     }
 
+    public String sqlError() {
+        if (errorMessage != null) {
+            return errorMessage;
+        } else if (output != null && !output.startsWith("{")) {
+            return output;
+        }
+        return null;
+    }
+
     public QueryJsonResult toJsonResult() {
         try {
             return OBJECT_MAPPER.readValue(output, QueryJsonResult.class);
