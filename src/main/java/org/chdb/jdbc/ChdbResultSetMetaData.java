@@ -33,7 +33,7 @@ public class ChdbResultSetMetaData implements ResultSetMetaData {
 
     @Override
     public boolean isSearchable(int column) throws SQLException {
-        return false;
+        return true;
     }
 
     @Override
@@ -43,17 +43,18 @@ public class ChdbResultSetMetaData implements ResultSetMetaData {
 
     @Override
     public int isNullable(int column) throws SQLException {
-        return 0;
+        return colsMeta[column - 1].contains("Nullable") ?
+                ResultSetMetaData.columnNullable : ResultSetMetaData.columnNoNulls;
     }
 
     @Override
     public boolean isSigned(int column) throws SQLException {
-        return false;
+        return !colsMeta[column - 1].startsWith("U");
     }
 
     @Override
     public int getColumnDisplaySize(int column) throws SQLException {
-        return 0;
+        return 80;
     }
 
     @Override
@@ -93,16 +94,15 @@ public class ChdbResultSetMetaData implements ResultSetMetaData {
 
     @Override
     public int getColumnType(int column) throws SQLException {
-        // TODO add more types
         String typeName = colsMeta[column - 1].toLowerCase();
         if (typeName.contains("(")) {
             typeName = typeName.substring(typeName.indexOf("("), typeName.length() - 2);
         }
-        if (typeName.startsWith("string")) {
+        if (typeName.contains("string") || typeName.startsWith("uuid") || typeName.startsWith("ip")) {
             return Types.VARCHAR;
         } else if (typeName.startsWith("int64")) {
             return Types.BIGINT;
-        } else if (typeName.contains("int")) {
+        } else if (typeName.startsWith("int") || typeName.startsWith("uint")) {
             return Types.INTEGER;
         } else if (typeName.startsWith("datetime")) {
             return Types.TIMESTAMP;
@@ -113,7 +113,11 @@ public class ChdbResultSetMetaData implements ResultSetMetaData {
         } else if (typeName.startsWith("decimal")) {
             return Types.DECIMAL;
         } else if (typeName.startsWith("float")) {
+            return Types.FLOAT;
+        } else if (typeName.startsWith("double")) {
             return Types.DOUBLE;
+        } else if (typeName.startsWith("bool")) {
+            return Types.BOOLEAN;
         }
         return Types.VARCHAR;
     }
@@ -125,7 +129,7 @@ public class ChdbResultSetMetaData implements ResultSetMetaData {
 
     @Override
     public boolean isReadOnly(int column) throws SQLException {
-        return false;
+        return true;
     }
 
     @Override

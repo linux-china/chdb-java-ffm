@@ -2,6 +2,7 @@ package org.chdb.jdbc;
 
 import org.chdb.*;
 import org.chdb.result.*;
+import org.jspecify.annotations.*;
 
 import java.io.*;
 import java.math.*;
@@ -21,7 +22,7 @@ public class ChdbPreparedStatement implements PreparedStatement {
     private final String sql;
     private final List<JdbcParam> params = new ArrayList<>();
 
-    public ChdbPreparedStatement(ChdbConnection conn, String sql) {
+    public ChdbPreparedStatement(ChdbConnection conn, @NonNull String sql) {
         this.connection = conn;
         this.sql = sql;
     }
@@ -216,17 +217,17 @@ public class ChdbPreparedStatement implements PreparedStatement {
 
     @Override
     public void setDate(int parameterIndex, Date x, Calendar cal) throws SQLException {
-
+        throw new SQLException("Not support");
     }
 
     @Override
     public void setTime(int parameterIndex, Time x, Calendar cal) throws SQLException {
-
+        throw new SQLException("Not support");
     }
 
     @Override
     public void setTimestamp(int parameterIndex, Timestamp x, Calendar cal) throws SQLException {
-
+        throw new SQLException("Not support");
     }
 
     @Override
@@ -436,7 +437,7 @@ public class ChdbPreparedStatement implements PreparedStatement {
 
     @Override
     public int getFetchDirection() throws SQLException {
-        return 0;
+        return ResultSet.FETCH_FORWARD;
     }
 
     @Override

@@ -139,12 +139,13 @@ public class ChdbResultSet implements ResultSet {
 
     @Override
     public BigDecimal getBigDecimal(int columnIndex, int scale) throws SQLException {
-        return getBigDecimal(cols[columnIndex - 1]);
+        BigDecimal bigDecimal = getBigDecimal(cols[columnIndex - 1]);
+        return bigDecimal.setScale(scale,RoundingMode.UP);
     }
 
     @Override
     public byte[] getBytes(int columnIndex) throws SQLException {
-        return new byte[0];
+        throw new SQLFeatureNotSupportedException("getBytes");
     }
 
     @Override
@@ -281,7 +282,7 @@ public class ChdbResultSet implements ResultSet {
 
     @Override
     public byte[] getBytes(String columnLabel) throws SQLException {
-        return new byte[0];
+        throw new SQLFeatureNotSupportedException("getBytes");
     }
 
     @Override
@@ -1108,12 +1109,20 @@ public class ChdbResultSet implements ResultSet {
             throw new SQLException("requested type cannot be null");
         } else if (type == String.class) {
             return type.cast(this.getString(columnLabel));
+        } else if (type == UUID.class) {
+            return (T) UUID.fromString(this.getString(columnLabel));
         } else if (type == Boolean.class) {
             return type.cast(this.getBoolean(columnLabel));
+        } else if (type == Integer.class) {
+            return type.cast(this.getInt(columnLabel));
+        } else if (type == Long.class) {
+            return type.cast(this.getLong(columnLabel));
+        } else if (type == Float.class) {
+            return type.cast(this.getFloat(columnLabel));
+        } else if (type == Double.class) {
+            return type.cast(this.getDouble(columnLabel));
         } else if (type == BigDecimal.class) {
             return type.cast(this.getBigDecimal(columnLabel));
-        } else if (type == byte[].class) {
-            return type.cast(this.getBytes(columnLabel));
         } else if (type == Date.class) {
             return type.cast(this.getDate(columnLabel));
         } else if (type == Time.class) {
