@@ -16,7 +16,7 @@ chdb-java-ffm is Java 22+ [JEP 454: Foreign Function & Memory API](https://openj
 </dependency>
 ```
 
-- Download chdb dynamic library by executing `update_libchdb.sh` script.
+- Download chdb dynamic library by executing `update_libchdb.sh` script, or download from https://github.com/chdb-io/chdb/releases.
 - Write your first test:
 
 ```java
