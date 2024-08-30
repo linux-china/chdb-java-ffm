@@ -11,9 +11,9 @@ chdb-java-ffm is Java 22+ [JEP 454: Foreign Function & Memory API](https://openj
 ```xml
 
 <dependency>
-    <groupId>io.chdb</groupId>
+    <groupId>org.mvnsearch</groupId>
     <artifactId>chdb-java-ffm</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
 </dependency>
 ```
 
