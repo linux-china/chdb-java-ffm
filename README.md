@@ -13,7 +13,7 @@ chdb-java-ffm is Java 22+ [JEP 454: Foreign Function & Memory API](https://openj
 <dependency>
     <groupId>org.mvnsearch</groupId>
     <artifactId>chdb-java-ffm</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
 </dependency>
 ```
 
@@ -28,7 +28,7 @@ public class ChdbConnectionTest {
 
     @BeforeAll
     public static void setUp() throws Exception {
-        String url = "jdbc:chdb:memory:";
+        String url = "jdbc:chdb::memory:";
         conn = DriverManager.getConnection(url);
     }
 
@@ -43,6 +43,13 @@ public class ChdbConnectionTest {
     }
 }
 ```
+
+# chdb JDBC
+
+JDBC URLs:
+
+- `jdbc:chdb::memory:`: in-memory database, path is **`:memory:`**
+- `jdbc:chdb:/path/to/db`: database from file path, and both relative and absolute paths supported.
 
 # Development setup
 
