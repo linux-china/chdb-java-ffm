@@ -141,3 +141,4 @@ buildNumber.properties
 
 .envrc
 libchdb.*
+chdb_data/
