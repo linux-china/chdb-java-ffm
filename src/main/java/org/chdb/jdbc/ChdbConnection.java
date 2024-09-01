@@ -1,8 +1,11 @@
 package org.chdb.jdbc;
 
+import org.jspecify.annotations.Nullable;
+
 import java.sql.*;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.Map;
+import java.util.Properties;
+import java.util.concurrent.Executor;
 
 /**
  * chdb JDBC connection
@@ -11,15 +14,33 @@ import java.util.concurrent.*;
  */
 public class ChdbConnection implements Connection {
     private final String url;
+    private final String dbPath;
+    private final boolean memoryMode;
     private Properties info;
 
     public ChdbConnection(String url, Properties info) {
         this.url = url;
         this.info = info;
+        String path = url.substring("jdbc:chdb:".length());
+        this.memoryMode = path.startsWith(":memory:") || path.startsWith("memory:");
+        if (!memoryMode) {
+            this.dbPath = path;
+        } else {
+            this.dbPath = null;
+        }
     }
 
     public String getUrl() {
         return url;
+    }
+
+    public boolean isMemoryMode() {
+        return memoryMode;
+    }
+
+    @Nullable
+    public String getDbPath() {
+        return this.dbPath;
     }
 
     @Override
