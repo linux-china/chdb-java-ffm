@@ -5,3 +5,7 @@ chdb-generate:
 # query logs.csv
 query:
   clickhouse local --query="select * from file('src/test/resources/logs.csv','CSV')" --format=JSON | jq
+
+# deploy to Maven Central
+c:
+  mvn -P release -DskipTests clean package deploy
