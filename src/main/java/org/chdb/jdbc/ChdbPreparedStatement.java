@@ -1,15 +1,18 @@
 package org.chdb.jdbc;
 
-import org.chdb.*;
-import org.chdb.result.*;
-import org.jspecify.annotations.*;
+import org.chdb.Chdb;
+import org.chdb.result.QueryResultV2;
+import org.jspecify.annotations.NonNull;
 
-import java.io.*;
-import java.math.*;
-import java.net.*;
-import java.sql.Date;
+import java.io.InputStream;
+import java.io.Reader;
+import java.math.BigDecimal;
+import java.net.URL;
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.regex.Pattern;
 
 
 /**
@@ -20,11 +23,18 @@ import java.util.*;
 public class ChdbPreparedStatement implements PreparedStatement {
     private final ChdbConnection connection;
     private final String sql;
+    private final String[] sqlParts;
     private final List<JdbcParam> params = new ArrayList<>();
 
     public ChdbPreparedStatement(ChdbConnection conn, @NonNull String sql) {
         this.connection = conn;
         this.sql = sql;
+        // todo SQL parser will be good solution for `?` replacement
+        this.sqlParts = (sql + " ").split(Pattern.quote("?"));
+    }
+
+    public String getSql() {
+        return sql;
     }
 
     /**
@@ -34,14 +44,13 @@ public class ChdbPreparedStatement implements PreparedStatement {
      */
     public String getRealSQL() {
         StringBuilder builder = new StringBuilder();
-        String[] parts = (sql + " ").split("\\?", params.size() + 1);
         for (int i = 0; i < params.size(); i++) {
-            builder.append(parts[i]);
+            builder.append(sqlParts[i]);
             String literalValue = params.get(i).getLiteralValue();
             builder.append(literalValue);
         }
-        if (!parts[parts.length - 1].isEmpty()) {
-            builder.append(parts[parts.length - 1]);
+        if (!sqlParts[sqlParts.length - 1].isEmpty()) {
+            builder.append(sqlParts[sqlParts.length - 1]);
         }
         return builder.toString();
     }
@@ -49,7 +58,8 @@ public class ChdbPreparedStatement implements PreparedStatement {
     @Override
     public ResultSet executeQuery() throws SQLException {
         String realSQL = getRealSQL();
-        QueryResultV2 resultV2 = Chdb.query(realSQL);
+        @SuppressWarnings("DuplicatedCode")
+        QueryResultV2 resultV2 = connection.getDbPath() != null ? Chdb.query(connection.getDbPath(), realSQL) : Chdb.query(realSQL);
         String sqlError = resultV2.sqlError();
         if (sqlError != null) {
             throw new SQLException(sqlError);
