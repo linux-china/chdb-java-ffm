@@ -11,7 +11,7 @@ public class ChdbConnectionTest {
 
     @BeforeAll
     public static void setUp() throws Exception {
-        String url = "jdbc:chdb:memory:";
+        String url = "jdbc:chdb::memory:";
         conn = DriverManager.getConnection(url);
     }
 
