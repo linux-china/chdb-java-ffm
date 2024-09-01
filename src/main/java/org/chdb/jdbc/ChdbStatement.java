@@ -1,7 +1,7 @@
 package org.chdb.jdbc;
 
-import org.chdb.*;
-import org.chdb.result.*;
+import org.chdb.Chdb;
+import org.chdb.result.QueryResultV2;
 
 import java.sql.*;
 
@@ -19,7 +19,7 @@ public class ChdbStatement implements Statement {
 
     @Override
     public ResultSet executeQuery(String sql) throws SQLException {
-        QueryResultV2 resultV2 = Chdb.query(sql);
+        QueryResultV2 resultV2 = connection.getDbPath() != null ? Chdb.query(connection.getDbPath(), sql) : Chdb.query(sql);
         String sqlError = resultV2.sqlError();
         if (sqlError != null) {
             throw new SQLException(sqlError);
