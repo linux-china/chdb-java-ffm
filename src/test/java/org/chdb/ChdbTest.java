@@ -13,4 +13,13 @@ public class ChdbTest {
         QueryJsonResult jsonResult = result.toJsonResult();
         System.out.println(jsonResult.meta());
     }
+
+    @Test
+    public void testClickHouseVersion() {
+        String sql = "select version() as clickhouse_version";
+        QueryResultV2 result = Chdb.query(sql);
+        System.out.println(result.getOutput());
+        QueryJsonResult jsonResult = result.toJsonResult();
+        System.out.println(jsonResult.meta());
+    }
 }
